@@ -12,8 +12,7 @@ use Dompdf\Options;
 
 
 
-class Salidas extends Controller
-{
+class Salidas extends Controller{
 
     public function index(){
         $salidaModel = new SalidaModel();
@@ -82,7 +81,7 @@ class Salidas extends Controller
            //El Trigger 'tr_actualizar_stock_salida' resta el stock automáticamente aquí.
         }
         
-        $id_nueva_salida = $salidaModel->insertID(); 
+        //$id_nueva_salida = $salidaModel->insertID(); 
         $db->transComplete();
 
         if ($db->transStatus() === false) {
@@ -92,11 +91,11 @@ class Salidas extends Controller
         if (session()->get('rol') !== 'ADMIN') {
             return redirect()->to(base_url('inicio'))
                 ->with('mensaje', 'Entrega de material registrada.') // Mensaje de éxito
-                ->with('abrir_pdf', $id_nueva_salida);
+                ->with('abrir_pdf', $idSalida);
         } else {
             return redirect()->to(base_url('salidas'))
                 ->with('mensaje', 'Salida registrada exitosamente.')
-                ->with('abrir_pdf', $id_nueva_salida);
+                ->with('abrir_pdf', $idSalida);
         }
     }
 
