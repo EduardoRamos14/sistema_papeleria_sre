@@ -65,7 +65,7 @@ class Entradas extends Controller
                     ]);
                     }
                     
-        $id_nueva_entrada = $entradaModel->insertID(); 
+       
         $db->transComplete();
 
         if ($db->transStatus() === false) {
@@ -75,12 +75,12 @@ class Entradas extends Controller
         if (session()->get('rol') !== 'ADMIN') {
             return redirect()->to(base_url('inicio'))
                 ->with('mensaje', 'Entrada registrada exitosamente.')
-                ->with('abrir_pdf', $id_nueva_entrada)
+                ->with('abrir_pdf', $idEntrada)
                 ->with('tipo_pdf', 'entradas'); // <--- Esto le dirá al script qué ruta usar
         } else {
             return redirect()->to(base_url('entradas'))
                 ->with('mensaje', 'Entrada registrada exitosamente.')
-                ->with('abrir_pdf', $id_nueva_entrada)
+                ->with('abrir_pdf', $idEntrada)
                 ->with('tipo_pdf', 'entradas');
         }
     }
@@ -129,7 +129,7 @@ class Entradas extends Controller
             return redirect()->back()->with('mensaje', 'Entrada no encontrada');
         }
 
-        $detalles = $detalleModel->select('entradas_detalle.*, productos.nombre as producto_nombre')
+        $detalles = $detalleModel->select('entradas_detalle.*, productos.nombre as producto_nombre, productos.unidad_medida as unidad_medida')
                                 ->join('productos', 'productos.id = entradas_detalle.producto_id')
                                 ->where('entrada_id', $id)
                                 ->findAll();

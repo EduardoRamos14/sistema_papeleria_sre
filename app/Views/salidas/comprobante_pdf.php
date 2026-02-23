@@ -35,6 +35,7 @@
                 <tr>
                     <th>Descripción del Producto</th>
                     <th align="center" width="15%">Cantidad</th>
+                    <th align="center" width="15%">Unidad de Medida</th>
                 </tr>
             </thead>
             <tbody>
@@ -42,6 +43,7 @@
                 <tr>
                     <td><?= $item->producto_nombre ?></td>
                     <td align="center"><?= $item->cantidad ?></td>
+                    <td align="center"><?= $item->unidad_medida ?></td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>

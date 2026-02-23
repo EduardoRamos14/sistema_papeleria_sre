@@ -139,7 +139,7 @@ class Salidas extends Controller
                 ->join('usuarios', 'usuarios.id_usuario = salidas.id_usuario') 
                 ->find($id);
 
-        $detalles = $detalleModel->select('salidas_detalle.*, productos.nombre as producto_nombre')
+        $detalles = $detalleModel->select('salidas_detalle.*, productos.nombre as producto_nombre, productos.unidad_medida as unidad_medida')
                                 ->join('productos', 'productos.id = salidas_detalle.producto_id')
                                 ->where('salida_id', $id)
                                 ->findAll();
