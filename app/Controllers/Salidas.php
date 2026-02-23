@@ -114,7 +114,7 @@ class Salidas extends Controller
         }
 
         // Consultamos los productos de esa salida
-        $detalles = $detalleModel->select('salidas_detalle.*, productos.nombre as producto_nombre')
+        $detalles = $detalleModel->select('salidas_detalle.*, productos.nombre as producto_nombre, productos.unidad_medida as unidad_medida')
                                 ->join('productos', 'productos.id = salidas_detalle.producto_id')
                                 ->where('salida_id', $id)
                                 ->findAll();
