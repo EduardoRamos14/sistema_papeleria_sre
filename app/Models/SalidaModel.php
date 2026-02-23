@@ -16,4 +16,9 @@ class SalidaModel extends Model
         'fecha_salida', 
         'notas'
         ];
+
+    protected $useTimestamps = true;
+    protected $dateFormat    = 'datetime';
+    protected $createdField  = 'fecha_salida'; 
+    protected $updatedField  = '';
 }

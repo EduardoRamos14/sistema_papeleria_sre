@@ -14,4 +14,9 @@ class EntradaDetalleModel extends Model
         'producto_id', 
         'cantidad'
         ];
+
+    protected $useTimestamps = true;
+    protected $dateFormat    = 'datetime';
+    protected $createdField  = 'fecha_registro'; 
+    protected $updatedField  = '';
 }
