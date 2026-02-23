@@ -12,8 +12,9 @@ use CodeIgniter\Router\RouteCollection;
             $routes->get('productos', 'Productos::index');             // Listado principal TODO:
             $routes->get('productos/crear', 'Productos::crear');         // Formulario nuevo TODO:
             $routes->post('productos/guardar', 'Productos::guardar');     // Acción insertar
-            $routes->get('editar/(:num)', 'Productos::editar/$1'); // Formulario editar
-            $routes->post('actualizar', 'Productos::actualizar'); // Acción actualizar
+            $routes->get('productos/editar/(:num)', 'Productos::editar/$1');// Formulario editar
+            $routes->post('productos/actualizar/(:num)', 'Productos::actualizar/$1'); // Acción actualizar
+            $routes->get('productos/eliminar/(:num)', 'Productos::eliminar/$1');
         
         // Proceso de Salidas (Entregas a áreas)
             $routes->get('salidas', 'Salidas::index');               // Historial de entregas

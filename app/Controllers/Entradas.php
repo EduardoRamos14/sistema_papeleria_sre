@@ -23,7 +23,7 @@ class Entradas extends Controller
     public function crear(){
         $productoModel = new ProductoModel();
         
-        $data['productos'] = $productoModel->findAll(); 
+        $data['productos'] = $productoModel->where('activo',1)->findAll(); 
         $data['titulo']    = "Cargar Stock Recibido";
 
         return view('entradas/crear', $data);
@@ -116,55 +116,55 @@ class Entradas extends Controller
     }
 
     public function generarPDF($id) {
-    $entradaModel = new EntradaModel();
-    $detalleModel = new EntradaDetalleModel();
+        $entradaModel = new EntradaModel();
+        $detalleModel = new EntradaDetalleModel();
 
-    // 1. Consultar datos (Con JOIN para traer al responsable)
-    $entrada = $entradaModel
-            ->select('entradas.*, usuarios.nombre as nombre_usuario')
-            ->join('usuarios', 'usuarios.id_usuario = entradas.id_usuario') 
-            ->find($id);
+        // 1. Consultar datos (Con JOIN para traer al responsable)
+        $entrada = $entradaModel
+                ->select('entradas.*, usuarios.nombre as nombre_usuario')
+                ->join('usuarios', 'usuarios.id_usuario = entradas.id_usuario') 
+                ->find($id);
 
-    if (!$entrada) {
-        return redirect()->back()->with('mensaje', 'Entrada no encontrada');
+        if (!$entrada) {
+            return redirect()->back()->with('mensaje', 'Entrada no encontrada');
+        }
+
+        $detalles = $detalleModel->select('entradas_detalle.*, productos.nombre as producto_nombre')
+                                ->join('productos', 'productos.id = entradas_detalle.producto_id')
+                                ->where('entrada_id', $id)
+                                ->findAll();
+
+        // 2. Preparar los datos
+        $data = [
+            'entrada'  => $entrada,
+            'detalles' => $detalles        
+        ];
+
+        // 3. Cargar el HTML
+        $html = view('entradas/comprobante_pdf', $data);
+
+        // 4. Configurar Dompdf (Forma correcta y limpia)
+        $options = new \Dompdf\Options();
+        $options->set('isRemoteEnabled', true); // Necesario para logos
+        $options->set('defaultFont', 'Helvetica');
+        
+        $dompdf = new \Dompdf\Dompdf($options);
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+
+        // 5. LIMPIEZA TOTAL (Vital para Hostinger)
+        if (ob_get_length()) {
+            ob_end_clean();
+        }
+
+        // 6. ENCABEZADOS Y SALIDA
+        header("Content-Type: application/pdf");
+        header("Content-Disposition: inline; filename='Comprobante_Entrada_{$id}.pdf'");
+        header("Cache-Control: private, max-age=0, must-revalidate");
+        header("Pragma: public");
+
+        echo $dompdf->output();
+        exit; 
     }
-
-    $detalles = $detalleModel->select('entradas_detalle.*, productos.nombre as producto_nombre')
-                            ->join('productos', 'productos.id = entradas_detalle.producto_id')
-                            ->where('entrada_id', $id)
-                            ->findAll();
-
-    // 2. Preparar los datos
-    $data = [
-        'entrada'  => $entrada,
-        'detalles' => $detalles        
-    ];
-
-    // 3. Cargar el HTML
-    $html = view('entradas/comprobante_pdf', $data);
-
-    // 4. Configurar Dompdf (Forma correcta y limpia)
-    $options = new \Dompdf\Options();
-    $options->set('isRemoteEnabled', true); // Necesario para logos
-    $options->set('defaultFont', 'Helvetica');
-    
-    $dompdf = new \Dompdf\Dompdf($options);
-    $dompdf->loadHtml($html);
-    $dompdf->setPaper('A4', 'portrait');
-    $dompdf->render();
-
-    // 5. LIMPIEZA TOTAL (Vital para Hostinger)
-    if (ob_get_length()) {
-        ob_end_clean();
-    }
-
-    // 6. ENCABEZADOS Y SALIDA
-    header("Content-Type: application/pdf");
-    header("Content-Disposition: inline; filename='Comprobante_Entrada_{$id}.pdf'");
-    header("Cache-Control: private, max-age=0, must-revalidate");
-    header("Pragma: public");
-
-    echo $dompdf->output();
-    exit; 
-}
 }

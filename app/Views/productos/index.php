@@ -36,6 +36,7 @@
                     <th>Clasificador</th>
                     <th>Stock Actual</th>
                     <th>Mínimo</th>
+                    <th>Estatus de Stock</th>
                     <th>Estatus</th>
                     <th></th>
                     <th></th>
@@ -56,10 +57,21 @@
                         <?php endif; ?>
                     </td>
                     <td>
-                        <button class="btn btn-outline-dark btn-sm"><i class></i>Editar</button>
+                        <?php if($p->activo == 0): ?>
+                            <span class="badge bg-danger"><i class="fas fa-exclamation-triangle"></i> Baja</span>
+                        <?php else: ?>
+                            <span class="badge bg-success"><i class="fas fa-check-circle"></i> Activo</span>
+                        <?php endif; ?>
                     </td>
                     <td>
-                        <button class="btn btn-outline-dark btn-sm">Eliminar</button>
+                        <a href="<?= base_url('productos/editar/' . $p->id) ?>" class="btn btn-outline-primary btn-sm">
+                            <i class="bi bi-pencil-square"></i> Editar
+                        </a>
+                    </td>
+                    <td>
+                        <button onclick="confirmarEliminacion('<?= base_url('productos/eliminar/' . $p->id) ?>')" class="btn btn-outline-danger btn-sm">
+                            <i class="bi bi-trash"></i> Eliminar
+                        </button>
                     </td>
                 </tr>
                 <?php endforeach; ?>
@@ -123,7 +135,15 @@
             ]
         });
     }
-});
+    });
+</script>
+
+<script>
+function confirmarEliminacion(url) {
+    if (confirm("¿Estás seguro de que deseas eliminar este producto? Esta acción no se puede deshacer.")) {
+        window.location.href = url;
+    }
+}
 </script>
     
 </body>

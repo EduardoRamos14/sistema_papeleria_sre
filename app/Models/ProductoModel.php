@@ -7,13 +7,15 @@ class ProductoModel extends Model {
     protected $table      = 'productos';
     protected $primaryKey = 'id';
     protected $returnType = 'object'; 
+    protected $useSoftDeletes = false;
     protected $allowedFields = [
         'nombre',
         'descripcion',
         'clasificador',
         'stock_actual',
         'stock_minimo',
-        'unidad_medida'
+        'unidad_medida',
+        'activo'
     ];
 
     protected $useTimestamps    = false; 

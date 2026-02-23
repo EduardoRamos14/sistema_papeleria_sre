@@ -36,7 +36,8 @@ class Salidas extends Controller
         $productoModel = new ProductoModel();
         $areaModel     = new AreaModel();
 
-        $data['productos'] = $productoModel->where('stock_actual >', 0)->findAll();
+        $data['productos'] = $productoModel->where('stock_actual >', 0)
+                                            ->where('activo',1)->findAll();
         $data['areas']     = $areaModel->findAll();
         $data['titulo']    = "Registrar Entrega de Material";
 
