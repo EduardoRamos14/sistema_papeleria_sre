@@ -1,0 +1,111 @@
+*,
+*:before,
+*:after{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    background-image: url('https://cotizaciones.comisasadecv.com/public/assets/img/astro.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    -webkit-background-size: cover; /* Para Safari y Chrome antiguos */
+    -moz-background-size: cover;    /* Para Firefox */
+    }
+
+.container_logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1.5rem;  
+    width: 100%;  
+}
+
+.logo_cdmx{  
+    max-width: 600px;
+    width: 100%;
+        
+}
+
+.text-rojo{
+    color: #9F2241;
+
+}
+
+.btn-rojo {
+    background-color: #9F2241;
+    border-color: #9F2241;
+    color: white;  /* Asegura que el texto sea blanco */
+}
+
+.btn-rojo:hover {
+    background-color: #8A1C36;  /* Tono más oscuro para el hover */
+    border-color: #8A1C36;
+    color: #BC955C;
+}
+
+.titulo {
+    font-weight: bold; /* Negrita */
+    letter-spacing: 1px; /* Espaciado entre letras */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    text-align: center;
+    
+}
+
+form {
+    max-height: 550px;
+    max-width: 480px; /* Tamaño máximo */
+    width: 100%; /* Se adapta al tamaño de la pantalla */
+    height: auto; /* Permite que el formulario crezca si es necesario */
+    background-color: rgba(255, 255, 255, 0.74);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    padding: 50px 35px;
+}
+form *{
+    font-family: 'Poppins',sans-serif;
+    color: #000;
+    letter-spacing: 0.5px;
+    outline: none;
+    border: none;
+}
+
+form h3{
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 42px;
+    text-align: center;
+}
+
+label{
+    display: block;
+    margin-top: 30px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+input{
+    display: block;
+    height: 50px;
+    width: 100%;
+    background-color: rgba(120, 173, 253, 0.26);
+    border-radius: 3px;
+    padding: 0 10px;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+::placeholder{
+    color: #e6e6e6;
+}
+
+
