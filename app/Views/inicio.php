@@ -14,7 +14,12 @@
 
 <div class="container">
     <h2 class="mb-4 text-secondary">Bienvenido al Control de Existencias</h2>
-
+<!-- <p>La hora actual del sistema es: <?= date('Y-m-d H:i:s') ?></p> -->
+ <p>Hora actual del sistema es: 
+    <span id="reloj-servidor" data-hora="<?= date('Y-m-d H:i:s') ?>">
+        <?= date('H:i:s') ?>
+    </span>
+</p>
     <div class="row g-3 mb-4">
         <div class="col-md-4">
             <div class="card text-white bg-primary h-100 shadow-sm">
@@ -140,6 +145,27 @@
     });
 <?php endif; ?>
 
+</script>
+
+<script>
+    // 1. Obtenemos la hora inicial que mandó el servidor
+    const spanReloj = document.getElementById('reloj-servidor');
+    let fechaServidor = new Date(spanReloj.getAttribute('data-hora'));
+
+    function ticTac() {
+        // 2. Sumamos un segundo a nuestra variable de fecha
+        fechaServidor.setSeconds(fechaServidor.getSeconds() + 1);
+
+        // 3. Formateamos la hora para mostrarla (HH:mm:ss)
+        const h = String(fechaServidor.getHours()).padStart(2, '0');
+        const m = String(fechaServidor.getMinutes()).padStart(2, '0');
+        const s = String(fechaServidor.getSeconds()).padStart(2, '0');
+
+        spanReloj.textContent = `${h}:${m}:${s}`;
+    }
+
+    // 4. Ejecutar cada segundo
+    setInterval(ticTac, 1000);
 </script>
 </body>
 </html>

@@ -63,6 +63,7 @@ class Productos extends Controller{
 
         // 2. Recolectamos los datos
         $data = [
+            'activo'        => $this->request->getPost('activo'),
             'nombre'        => $this->request->getPost('nombre'),
             'descripcion'   => $this->request->getPost('descripcion'),
             'clasificador'  => $this->request->getPost('clasificador'),

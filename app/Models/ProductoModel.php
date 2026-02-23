@@ -21,7 +21,7 @@ class ProductoModel extends Model {
    protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = ''; 
-    protected $updatedField  = 'updated_ad';
+    protected $updatedField  = 'updated_at';
 
 
 }
