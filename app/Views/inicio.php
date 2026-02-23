@@ -11,15 +11,14 @@
 <body class="bg-light">
 
     <?=view ("partials/navbar"); ?><!--NavBar-->
-
 <div class="container">
-    <h2 class="mb-4 text-secondary">Bienvenido al Control de Existencias</h2>
-<!-- <p>La hora actual del sistema es: <?= date('Y-m-d H:i:s') ?></p> -->
  <p>Hora actual del sistema es: 
     <span id="reloj-servidor" data-hora="<?= date('Y-m-d H:i:s') ?>">
         <?= date('H:i:s') ?>
     </span>
 </p>
+    <h2 class="mb-4 text-secondary">Bienvenido al Control de Existencias</h2>
+
     <div class="row g-3 mb-4">
         <div class="col-md-4">
             <div class="card text-white bg-primary h-100 shadow-sm">
@@ -123,8 +122,10 @@
             </div>
             
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
 <script>
-<?php if (session()->getFlashdata('abrir_pdf')): ?>
+   <?php if (session()->getFlashdata('abrir_pdf')): ?>
     $(document).ready(function() {
         const id = "<?= session()->getFlashdata('abrir_pdf') ?>";
         // Detectamos el tipo (si no se envía, por defecto será 'salidas')
@@ -144,7 +145,6 @@
         }
     });
 <?php endif; ?>
-
 </script>
 
 <script>

@@ -16,7 +16,7 @@ class EntradaModel extends Model
         'fecha_registro'
         ];
 
-    protected $useTimestamps = true;
+   protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'fecha_registro'; 
     protected $updatedField  = '';

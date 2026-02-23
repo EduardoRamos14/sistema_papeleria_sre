@@ -12,7 +12,8 @@ use Dompdf\Options;
 
 
 
-class Salidas extends Controller{
+class Salidas extends Controller
+{
 
     public function index(){
         $salidaModel = new SalidaModel();
@@ -43,7 +44,7 @@ class Salidas extends Controller{
         return view('salidas/crear', $data);
     }
 
-    public function guardar(){
+      public function guardar(){
         $db = \Config\Database::connect();
         $salidaModel = new SalidaModel();
         $detalleModel = new SalidaDetalleModel();

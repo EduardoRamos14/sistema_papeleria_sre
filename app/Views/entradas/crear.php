@@ -71,7 +71,7 @@
 
         let opciones = '<option value="">Seleccione el producto...</option>';
         productos.forEach(p => {
-            opciones += `<option value="${p.id}">${p.nombre} [${p.clasificador}]</option>`;
+           opciones += `<option value="${p.id}">${p.nombre} [${p.clasificador}] [${p.unidad_medida}]</option>`;
         });
 
         row.innerHTML = `

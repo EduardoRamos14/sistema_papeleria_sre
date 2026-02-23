@@ -130,8 +130,8 @@
 });
 </script>
 
-<?php if (session()->getFlashdata('abrir_pdf')): ?>
 <script>
+<?php if (session()->getFlashdata('abrir_pdf')): ?>
     $(document).ready(function() {
         // Obtenemos el ID que mandamos desde el controlador
         const salidaId = "<?= session()->getFlashdata('abrir_pdf') ?>";
@@ -140,6 +140,6 @@
         // Abrimos el PDF en una pestaña nueva
         window.open(urlPdf, '_blank');
     });
-</script>
 <?php endif; ?>
+</script>
 </html>
