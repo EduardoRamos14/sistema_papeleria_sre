@@ -68,7 +68,7 @@
                                 <tr>
                                     <th class="ps-4">Descripción del Producto</th>
                                     <th class="text-center">Cantidad Recibida</th>
-                                    <th class="text-end pe-4">Subtotal (Visual)</th>
+                                    <th class="text-end pe-4">Unidad de Medida</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -89,7 +89,7 @@
                                         <span class="badge bg-info text-dark fs-6">+ <?= $item->cantidad ?></span>
                                     </td>
                                     <td class="text-end pe-4">
-                                        <span class="text-muted">Movimiento de Almacén</span>
+                                        <span class="text-muted"><?= $item->unida_medida ?></span>
                                     </td>
                                 </tr>
                                 <?php endforeach; ?>

@@ -99,7 +99,7 @@ class Entradas extends Controller
 
         // 2. Obtener los productos vinculados a esa entrada
         $detalles = $db->table('entradas_detalle as ed')
-                    ->select('ed.*, p.nombre as producto_nombre, e.fecha_registro as fecha_entrada')
+                    ->select('ed.*, p.nombre as producto_nombre, p.unidad_medida as unida_medida, e.fecha_registro as fecha_entrada')
                     ->join('productos as p', 'p.id = ed.producto_id')
                     ->join('entradas as e', 'e.id = ed.entrada_id')
                     ->where('ed.entrada_id', $id)
